@@ -1,0 +1,10 @@
+main{
+    display: flex;
+    justify-content: space-between;
+}
+div{
+    margin: 25px;
+    width: 500px;
+    border: 2px solid lightgray;
+    text-align: center;
+}

@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect, HttpResponse
+from.models import Author,Book
 
 def index(request):
-    return HttpResponse("Hello world")
+    context = {
+        "authors": Author.objects.all()
+    }
+    return render(request,"index.html",context)
 
-# Create your views here.
+

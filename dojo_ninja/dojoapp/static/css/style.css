@@ -1,0 +1,11 @@
+main{
+    display: flex;
+    justify-content:space-around;
+    border-bottom: 2px solid lightgrey;
+    width: 900px;
+}
+form{
+    width: 400px;
+    margin: 15px;
+    padding: 15px;
+}

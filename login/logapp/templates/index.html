@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main page</title>
+    {% load static %}
+      <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    
+</head>
+<body>
+    <main>
+        <div id="register">
+            <h1>Register</h1>
+            <form action="/process" method="POST">
+                {% csrf_token %}
+                <p>First Name <input type="text" name="fname" required> </p>
+                <p>Last Name <input type="text" name="lname" required> </p>
+                <p>Email <input type="email" name="email" required> </p>
+                <p>password <input type="password" name="passe" required> </p>
+                <p> Confirm PWD <input type="password" name="cpass" required> </p>
+                <p> <input type="submit" value="Register"> </p>
+            </form>
+        </div>
+        <div id="login">
+            <h1>Log in</h1>
+            <form action="/process2" method="POST">
+                {% csrf_token %}
+                <p>Email <input type="email" name="lemail"> </p>
+                <p>password <input type="password" name="lpass"> </p>
+                <p> <input type="submit" value="login"> </p>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

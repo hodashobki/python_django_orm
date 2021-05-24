@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Information</title>
+</head>
+<body>
+    <h2> Author:{{ authid.first_name}}</h2>
+    <h3>Author id {{authid.id}}</h3>
+    <h3>Notes</h3>
+    <p>{{authid.notes}}</p>
+
+    <div>
+        <h1>Books:</h1>
+        <ul>
+            {% for i in books %}
+            <li>{{i.title}}</li>
+        </ul>
+        {% endfor %}
+    </div>
+    <div>
+        <form action="/drop1" method="POST">
+            {% csrf_token %}
+            <select name="books">
+                {% for i in drop %}
+                <option>{{i.title}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Add">
+        </form>
+
+    </div>
+</body>
+</html>

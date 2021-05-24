@@ -1,0 +1,29 @@
+1-python manage.py makemigrations
+2-python manage.py migrate
+3-python manage.py shell
+4-from userapp.models import User
+5- User.objects.create(first_name="Ahmad",last_name="Tareq",email="ahmaad@tareq.com",age=25)
+6-User.objects.create(first_name="Ali",last_name="Tareq",email="ahmaad@tareq.com",age=35)
+7-User.objects.create(first_name="Mohmad",last_name="Tareq",email="mohmad@tareq.com",age=26)
+8-User.objects.all().values()
+<QuerySet [{'id': 1, 'first_name': 'Ahmad', 'last_name': 'Tareq', 'email': 'ahmaad@tareq.com', 'age': 25, 'created_at': datetime.datetime(2021, 5, 20, 8, 45, 19, 935506, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 8, 45, 19, 935506, tzinfo=<UTC>)}, {'id': 2, 'first_name': 'Ali', 'last_name': 'Tareq', 'email': 'ahmaad@tareq.com', 'age': 35, 'created_at': datetime.datetime(2021, 5, 20, 8, 47, 46, 693233, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 8, 47, 46, 694340, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'Mohmad', 'last_name': 'Tareq', 'email': 'mohmad@tareq.com', 'age': 26, 'created_at': datetime.datetime(2021, 5, 20, 8, 48, 39, 598295, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 8, 48, 39, 598295, tzinfo=<UTC>)}]>
+9-User.objects.last().__dict__
+{'_state': <django.db.models.base.ModelState object at 0x0000020D38890730>, 'id': 3, 'first_name': 'Mohmad', 'last_name': 'Tareq', 'email': 'mohmad@tareq.com', 'age': 26, 'created_at': datetime.datetime(2021, 5, 20, 8, 48, 39, 598295, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 8, 48, 39, 598295, tzinfo=<UTC>)}
+10- User.objects.first().__dict__
+{'_state': <django.db.models.base.ModelState object at 0x0000020D38890CA0>, 'id': 1, 'first_name': 'Ahmad', 'last_name': 'Tareq', 'email': 'ahmaad@tareq.com', 'age': 25, 'created_at': datetime.datetime(2021, 5, 20, 8, 45, 19, 935506, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 8, 45, 19, 935506, tzinfo=<UTC>)}
+11- c = User.objects.get(id=3)
+>>> c.last_name = "Pancakes"
+>>> c.save()
+>>> User.objects.get(id=3).__dict__
+{'_state': <django.db.models.base.ModelState object at 0x0000020D38890FA0>, 'id': 3, 'first_name': 'Mohmad', 'last_name': 'Pancakes', 'email': 'mohmad@tareq.com', 'age': 26, 'created_at': datetime.datetime(2021, 5, 20, 8, 48, 39, 598295, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 9, 2, 51, 152631, tzinfo=<UTC>)}
+>>>
+12-c = User.objects.get(id=2)
+>>> c.delete()
+(1, {'userapp.User': 1})
+>>>
+13-User.objects.all().order_by("first_name")
+<QuerySet [<User: User object (1)>, <User: User object (3)>]>
+>>>
+14-User.objects.all().order_by("-first_name")
+<QuerySet [<User: User object (3)>, <User: User object (1)>]>
+>>>

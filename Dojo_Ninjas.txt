@@ -1,0 +1,72 @@
+1-python manage.py shell
+
+2-from dojoapp.models import *
+
+3- dojo1=Dojo.objects.create(name="Ahmad",city="Atlanta",state="ge")
+>>> dojo2=Dojo.objects.create(name="Mohammad",city="New Orleans",state="lo")
+>>> dojo3=Dojo.objects.create(name="Fatima",city="New York",state="Ny")
+
+4-c=Dojo.objects.get(id=1)
+>>> c.delete()
+(1, {'dojoapp.Dojo': 1})
+c=Dojo.objects.get(id=2)
+>>> c.delete()
+(1, {'dojoapp.Dojo': 1})
+ c=Dojo.objects.get(id=3)
+>>> c.delete()
+(1, {'dojoapp.Dojo': 1})
+
+5-dojo1=Dojo.objects.create(name="Ahmad",city="Atlanta",state="GE")
+>>> dojo2=Dojo.objects.create(name="Mohammad",city="New Orleans",state="LO")
+>>> dojo3=Dojo.objects.create(name="Fatima",city="New York",state="Ny")
+
+6- ninja1a=Ninja.objects.create(dojo=dojo1,first_name="Ali",last_name="Ahmad")
+ ninga2a=Ninja.objects.create(dojo=dojo1,first_name="Laila",last_name="Ahmad")
+ninga3a=Ninja.objects.create(dojo=dojo1,first_name="Nedal",last_name="Ahmad")
+
+7- ninga1b=Ninja.objects.create(dojo=dojo2,first_name="salma",last_name="Mohammad")
+>>> ninga2b=Ninja.objects.create(dojo=dojo2,first_name="salwa",last_name="Mohammad")
+>>> ninga3b=Ninja.objects.create(dojo=dojo2,first_name="samir",last_name="Mohammad")
+
+8-ninga1c=Ninja.objects.create(dojo=dojo3,first_name="Jamil",last_name="Fatima")
+>>> ninga2c=Ninja.objects.create(dojo=dojo3,first_name="Jomanah",last_name="Fatima")
+>>> ninga3c=Ninja.objects.create(dojo=dojo3,first_name="Jalal",last_name="Fatima")
+
+9-dojo1.ninjas.all()
+<QuerySet [<Ninja: Ninja object (1)>, <Ninja: Ninja object (2)>, <Ninja: Ninja object (3)>]>
+>>> for i in dojo1.ninjas.all():
+...     print(i.first_name)
+...
+Ali
+Laila
+Nedal
+
+10- for i in dojo3.ninjas.all():
+...      print(i.first_name)
+...
+Jamil
+Jomanah
+Jalal
+
+11- ninga3c.dojo.name
+'Fatima'
+
+12-desc=models.CharField(max_length=45)
+python manage.py makemigrations
+You are trying to add a non-nullable field 'desc' to dojo without a default; we can't do that (the database needs something to populate existing rows).
+Please select a fix:
+ 1) Provide a one-off default now (will be set on all existing rows with a null value for this column)
+ 2) Quit, and let me add a default in models.py
+Select an option: 1
+Please enter the default value now, as valid Python
+The datetime and django.utils.timezone modules are available, so you can do e.g. timezone.now
+Type 'exit' to exit this prompt
+>>> "default"
+Migrations for 'dojoapp':
+  dojoapp\migrations\0002_dojo_desc.py
+    - Add field desc to dojo
+
+C:\Users\user\Desktop\python_stack\django\django_orm\dojo_ninja>python manage.py migrate
+
+13- dojo4=Dojo.objects.create(name="Lily",city="La",state="CA",desc="near")
+
