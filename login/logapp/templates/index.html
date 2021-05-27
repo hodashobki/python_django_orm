@@ -15,9 +15,9 @@
             <h1>Register</h1>
             <form action="/process" method="POST">
                 {% csrf_token %}
-                <p>First Name <input type="text" name="fname" required> </p>
-                <p>Last Name <input type="text" name="lname" required> </p>
-                <p>Email <input type="email" name="email" required> </p>
+                <p>First Name <input type="text" name="fname"value="First name" required> </p>
+                <p>Last Name <input type="text" name="lname" value="Last name" required> </p>
+                <p>Email <input type="email" name="email" value='Email' required> </p>
                 <p>password <input type="password" name="passe" required> </p>
                 <p> Confirm PWD <input type="password" name="cpass" required> </p>
                 <p> <input type="submit" value="Register"> </p>

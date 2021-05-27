@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Form</title>
+    {% load static %}
+      <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+</head>
+<body>
+    <h1>All Shows</h1>
+    <table id="ab">
+        <thead>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Release Date</th>
+            <th> Actions</th>
+        </thead>
+        <tbody>
+            {% for item in allshow %}
+            <tr>
+                <td>{{item.id}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.released_date}}</td>
+                <td><a href="/show/{{item.id}}">Show</a>|<a href="/show/edit/{{item.id}}">Edit</a>|<a href="/show/{{item.id}}/destroy">Delete</a></td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    <P><a href="/show/new">Add a new show</a></P>
+</body>
+</html>
