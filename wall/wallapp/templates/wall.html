@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wall</title>
+    {% load static %}
+      <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+</head>
+<body>
+  <center>
+  <h1>The Wall</h1>
+  <h1>Hello {{fname}}</h1>
+  
+  <p>
+      <a href="/logout">Log out</a>
+  </p>
+
+  <div class="dv">
+      <form action="/creat-message" method="POST" class="co">
+        {% csrf_token %}
+        <p>Post a Message</p>
+        <label for="mes"><textarea id="mes" name="message" cols='100',rows='10'></textarea></label> 
+        <input type="submit" value="send a message">
+    </form>
+    </div>
+
+    <div  class="dv">
+      {% for message in messages %}
+      <div class="dv">
+      <p>{{message.user.fname}} {{message.user.lname}} {{message.created_at}}</p>
+      <p>{{message.content}}</p>
+    <div  class="dv">
+      {% for comment in comments %}
+      
+      <p> {{comment.user.fname}} {{comment.user.lname}} {{comment.created_at}}</p>
+      <p>{{comment.content}}</p>
+      
+      {% endfor %}
+      </div>
+      <form action="/comment" method="POST" class="co">
+        {% csrf_token %}
+        <p>Post a comment</p>
+        
+        <input type="hidden" name="messagid" value="{{message.id}}"> 
+        <label for="mes"><textarea id="mes" name="content"></textarea></label>
+        <input type="submit" value="comment here">
+    </form>
+    
+    </div> 
+    {% endfor%} 
+    
+  </div>
+</center> 
+</body>
+</html>
