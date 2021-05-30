@@ -15,8 +15,8 @@ def register(request):
         return redirect("/")
     
     pw_hash=bcrypt.hashpw(request.POST['pw'].encode(),bcrypt.gensalt()).decode()
-    new_user=User.objects.create(fname=request.POST['fname'],lname=request.POST['lname'],email=request.POST['email'],pw=pw_hash)
-    request.session['id']=new_user.id
+    user=User.objects.create(fname=request.POST['fname'],lname=request.POST['lname'],email=request.POST['email'],pw=pw_hash)
+    request.session['id']=user[0].id
     # x=new_user.id
     # print(x)
     request.session['fname']=request.POST["fname"]
@@ -40,7 +40,7 @@ def log(request):
     if user:
         loged_user=user[0]
         if bcrypt.checkpw(request.POST['pw2'].encode(), loged_user.pw.encode()):
-            request.session['userid'] = loged_user.id
+            request.session['id'] = loged_user.id
             request.session['fname'] = loged_user.fname
 
         return redirect("/success")  

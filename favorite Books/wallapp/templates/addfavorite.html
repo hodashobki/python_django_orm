@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Favorites</title>
+    {% load static %}
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="anc">
+        <a href="/logout">Log out</a>
+    </div>
+    <article>
+        <div class="ri">
+        <h1>Hello {{loged_user.fname}} {{loged_user.lname}} !</h1>
+        <h3>{{book.title}}</h3>
+        <p>Added By: {{book.uploaded_by.fname}} {{book.uploaded_by.fname}}</p>
+        <p>Added on: {{book.created_at}}</p>
+        <p>Last update :{{book.updated_at}}</p>
+        </div>
+
+        <div class="lef">
+
+
+
+        <p>Users who like this Book</p>
+        <ul>
+            {% for user in users %}
+            <li>{{ user.fname }} {{ user.lname }} <a href="/unfavorite/{{book.id}}/{{request.session.id}}">Unfavorite</a></li>
+            {% endfor %}
+            
+        </ul>
+        </div >
+</article>
+</body>
+</html>

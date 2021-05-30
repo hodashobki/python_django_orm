@@ -45,7 +45,6 @@ def log(request):
 
 def success(request):
     #if 'id' not in request.session:
-         #loged_user=User.objects.get(id=request.session['id'])
     context={
             "fname":request.session["fname"],
             #"user":User.objects.get(id=request.session['id']),
@@ -54,7 +53,7 @@ def success(request):
 
         }
     return render(request,"wall.html",context) 
-    
+ ####################################################3   
                               
 
 def message(request):

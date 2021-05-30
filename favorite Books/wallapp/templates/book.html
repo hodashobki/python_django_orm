@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wall</title>
+    {% load static %}
+      <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+</head>
+<body>
+  <h1>Hello {{fname}}! {{loged_user.lname}}</h1>
+   
+  <div>
+      <a href="/logout">Log out</a>
+  </div>
+  <main>
+     
+    <div id='bo'>
+    <h1>this Book</h1>
+    {% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form action="/add-book" method="POST">
+      {% csrf_token %}
+      <label for="tit"><input type="text" name="title" id="tit"> </label>
+        <label for="des"> <input type="text" name="desc"></label>
+        <input type="submit" value="Add your favorite book">
+    </form>
+  </div>
+  <div id="bo">
+    <h3>All Books</h3>
+    <!-- {% for book in books %}
+        <p> <a href="/books/{{book.id}}"> {{book.title}}</a></p>
+        <p>Added by :{{book.uploaded_by.fname}}  {{book.uploaded_by.lname}}</p>
+    {% endfor %}  -->
+    {% for book in books %}
+        {% if book.uploded_by.id == request.session.id %}
+    <p> <a href="/books/{{book.id}}"> {{book.title}}</a></p>
+    <p>Added by :{{book.uploaded_by.fname}}  {{book.uploaded_by.lname}}</p>
+        {% else %}
+    <p>Added by :{{book.uploaded_by.fname}}  {{book.uploaded_by.lname}}</p>
+    <p> {{book.title}}</p>
+    <p><a href="/addfavorite/{{request.session.id}}/{{book.id}}">Add to favorite</a></p>
+    <p> <a href="/books/{{book.id}}"> {{book.title}}</a></p>
+    {% endif %}
+{% endfor %}
+  </div>
+  </main> 
+</body>
+</html>

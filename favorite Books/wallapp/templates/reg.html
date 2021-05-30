@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration</title>
+    {% load static %}
+      <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+</head>
+<body>
+    <main>
+        <div>
+            <h1>Registration</h1>
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="/register" method="POST">
+                {% csrf_token %}
+                <label for="fname"> First Name :<input type="text" name="fname" id="fname" ></label>
+                <label for="lname"> Last Name :<input type="text" name="lname" id="lname" ></label>
+                <label for="email">Email: <input type="email" name="email" id="email" ></label>
+                <label for="passw">Password :<input type="password" name="pw" id="passw" ></label>
+                <label for="cpw">Confirm PW <input type="password" name="cpw" id="cpw" ></label>
+                <input type="submit" value="Registration">
+            </form>
+        </div>
+        <div>
+            <h1>Login</h1>
+            {% if messages %}
+            <ul class="messages">    
+                {% for message in messages %}    
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action="/log" method="POST">
+                {% csrf_token %}
+                <label for="email">Email: <input type="email" name="email2" id="email" ></label>
+                <label for="passw">Password <input type="password" name="pw2" id="passw" ></label>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </main>
+</body>
+</html>
